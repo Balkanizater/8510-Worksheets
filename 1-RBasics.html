@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="">
+
+<title>Worksheet 1: R Basics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="1-RBasics_files/libs/clipboard/clipboard.min.js"></script>
+<script src="1-RBasics_files/libs/quarto-html/quarto.js"></script>
+<script src="1-RBasics_files/libs/quarto-html/popper.min.js"></script>
+<script src="1-RBasics_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="1-RBasics_files/libs/quarto-html/anchor.min.js"></script>
+<link href="1-RBasics_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="1-RBasics_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="1-RBasics_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="1-RBasics_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="1-RBasics_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Worksheet 1: R Basics</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><em>This is the first in a series of worksheets for History 8510 at Clemson University. The goal of these worksheets is simple: practice, practice, practice. The worksheet introduces concepts and techniques and includes prompts for you to practice in this interactive document. When you are finished, you should change the author name (above), knit your document to a pdf, and upload it to canvas.</em></p>
+<section id="what-is-r" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-r">What is R?</h2>
+<p>To start let’s define what exactly R is. R is a language and environment for statistical computing and graphics. R provides a variety of statistical and graphical techniques and its very extensible which makes it an ideal language for historians.</p>
+</section>
+<section id="foundational-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="foundational-concepts">Foundational Concepts</h2>
+<section id="values" class="level3">
+<h3 class="anchored" data-anchor-id="values">Values</h3>
+<p>There are several kinds of variables in R. Numeric, logical, and strings.</p>
+<p>R takes inputs and returns an output. So for example, if our input is a number the output will be a number. Simply typing a number, below or in the console, will return a number or a <strong>numeric</strong> value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<p>Same thing happens if we use a number with a decimal.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fl">5.5483</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.5483</code></pre>
+</div>
+</div>
+<p>Numbers can be used to do arithmetic.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+</div>
+<ol class="example" type="1">
+<li>You try, multiple two numbers.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<ol start="2" class="example" type="1">
+<li>Can you multiply two numbers and then divide by the result?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span><span class="sc">*</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p>The next type of value is a <strong>string</strong>. Strings are lines of text. Sometimes these are referred to as character vectors. To create a string, you add text between two quotation marks. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Go Tigers"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Go Tigers"</code></pre>
+</div>
+</div>
+<ol start="3" class="example" type="1">
+<li>Try to create your own string.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="st">"I love Clemson"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "I love Clemson"</code></pre>
+</div>
+</div>
+<p>You can’t add strings using <code>+</code> like you can numbers. But there is a function called <code>paste()</code> which concatenates character vectors into one. This function is <em>very</em> useful and one you’ll use a lot in a variety of circumstances. Here’s what that looks like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"Hello"</span>, <span class="st">"Clemson Graduate Students"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello Clemson Graduate Students"</code></pre>
+</div>
+</div>
+<ol start="4" class="example" type="1">
+<li>Try it, add two strings together like the above example.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"Good Evening"</span>, <span class="st">"Mandy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Good Evening Mandy"</code></pre>
+</div>
+</div>
+<ol start="5" class="example" type="1">
+<li>Can you explain what happened in 2-3 sentences?</li>
+</ol>
+<blockquote class="blockquote">
+<p>The paste function added two strings together, this can be useful in the future.</p>
+</blockquote>
+<p>The last type are <strong>logical</strong> values like <code>TRUE</code> and <code>FALSE</code>. (Note that these are all caps.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cn">FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>These logical values are really useful for testing a statement and comparing values to each other. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">&lt;</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>3 is indeed less than 4 so the return value is <code>TRUE</code>. Here are a few more examples:</p>
+<p>R also has relational operators and logical operators. Relational operators test how one object relates to another. We’ve been using some of these above.</p>
+<ul>
+<li>Equality <code>==</code></li>
+<li>Inequality <code>!=</code></li>
+<li>Less than or Greater than <code>&lt;</code> and <code>&gt;</code></li>
+<li>Less than/greater than or equal to <code>&lt;=</code> and <code>&gt;=</code></li>
+</ul>
+<p>Logical Operators allow you to combine or change the results of comparisons. * AND <code>&amp;</code> * OR <code>|</code> * NOT <code>!</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">==</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">&lt;</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">!=</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">!=</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">==</span> <span class="dv">4</span> <span class="sc">|</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">!=</span> <span class="dv">4</span> <span class="sc">&amp;</span> <span class="dv">3</span> <span class="sc">!=</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<ol start="6" class="example" type="1">
+<li>Explain, what does the code on each line above do?</li>
+</ol>
+<blockquote class="blockquote">
+<p>These are different ways to make value comparisons.</p>
+</blockquote>
+<ol start="7" class="example" type="1">
+<li>Create your own comparison.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">==</span> <span class="dv">7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">!=</span> <span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="sc">&lt;</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="variables" class="level3">
+<h3 class="anchored" data-anchor-id="variables">Variables</h3>
+<p>Values are great but they are made so much more powerful when combined with <strong>Variables</strong> which are a crucial building block of any programming language. Simply put, a variable stores a value. For example if I want x to equal 5 I can do that like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>&lt;-</code> is known as an assignment operator. Technically, you could use <code>=:</code> here too but it is considered bad practice and can cause complicated issues when you write more advanced code. So its important to stick with <code>&lt;-</code> whenever you are coding in R.</p>
+<p>I can also add a string or character vector to a variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"Go Tigers!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Variable names can be almost anything.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>MyFavoriteNumber <span class="ot">&lt;-</span> <span class="dv">25</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Variable or object names must start with a letter, and can only contain letters, numbers, <code>_</code>, and <code>.</code>. You want your object names to be descriptive, so you’ll need a convention for multiple words. People do it different ways. I tend to use periods but there are several options:</p>
+<pre><code>i_use_snake_case 
+otherPeopleUseCamelCase 
+some.people.use.periods 
+And_aFew.People_RENOUNCEconvention</code></pre>
+<p>Whatever you prefer, be consistent and your future self will thank you when your code gets more complex.</p>
+<ol start="8" class="example" type="1">
+<li>You try, create a variable and assign it a number:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"I love Clemson"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="9" class="example" type="1">
+<li>Can you assign a string to a variable?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a> y <span class="ot">&lt;-</span> <span class="st">"I am struggling with R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Once we’ve assigned a variable we can use that variable to run calculations just like we did with raw numbers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">25</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 125</code></pre>
+</div>
+</div>
+<p>R can also handle more complex equations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>(x <span class="sc">+</span> x)<span class="sc">/</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>(x <span class="sc">+</span> x <span class="sc">*</span> x) <span class="sc">-</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 550</code></pre>
+</div>
+</div>
+<p>And we could store the output of a calculation in a new variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>My.Calculation <span class="ot">&lt;-</span> (x <span class="sc">+</span> x)<span class="sc">*</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="10" class="example" type="1">
+<li>You try. Assign a number to x and a number to y. Add those two numbers together.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">25</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">30</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 55</code></pre>
+</div>
+</div>
+<ol start="11" class="example" type="1">
+<li>Can you take <code>x</code> and <code>y</code> and multiply the result by 5?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>(a <span class="sc">+</span> b) <span class="sc">*</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 275</code></pre>
+</div>
+</div>
+<ol start="12" class="example" type="1">
+<li>Try creating two variables with names other than <code>x</code> and <code>y</code>. Descriptive names tend to be more useful. Can you multiply the contents of your variables?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>g <span class="sc">*</span> h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 35</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>g <span class="sc">*</span> h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 35</code></pre>
+</div>
+</div>
+<ol start="13" class="example" type="1">
+<li>Try creating two variables that store strings. Can you concatenate those two variables together?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "25 I am struggling with R"</code></pre>
+</div>
+</div>
+</section>
+<section id="vectors" class="level3">
+<h3 class="anchored" data-anchor-id="vectors">Vectors</h3>
+<p>If we have a lot of code and rely on just variables, we’re going to have a lot of variables. That’s where <strong>vectors</strong> come into play. Vectors allow you to store multiple values. All variables in R are actually already vectors. That’s why when R prints an output, there is a <code>[1]</code> before it. That means there is one item in that vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>myvalue <span class="ot">&lt;-</span> <span class="st">"George Washington"</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>myvalue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "George Washington"</code></pre>
+</div>
+</div>
+<p>In this instance “George Washington” is the only item in the variable myvalue. But we could add more. To do that we use the <code>c()</code> function which combines values into a vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>myvalue <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"George Washington"</span>, <span class="st">"Franklin Roosevelt"</span>, <span class="st">"John Adams"</span>)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>myvalue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "George Washington"  "Franklin Roosevelt" "John Adams"        </code></pre>
+</div>
+</div>
+<p>You’ll notice that the output still only shows <code>[1]</code> but that doesn’t mean there is only one item in the list. It simply means George Washington is the first. If we use <code>length()</code> we can determine the number of items in this vector list.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(myvalue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>We could get the value of the 2nd or 3rd item in that list like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>myvalue[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Franklin Roosevelt"</code></pre>
+</div>
+</div>
+<p>We could also create a vector of numbers:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>my.numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And we could then do calculations based on these values:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>my.numbers <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4  8 12 16</code></pre>
+</div>
+</div>
+<ol start="14" class="example" type="1">
+<li>Explain in a few sentences, what happened in the code above?</li>
+</ol>
+<blockquote class="blockquote">
+<p>This allows for a series of calculations to be made at speed.</p>
+</blockquote>
+<p>Lets try something slightly different.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>my.numbers[<span class="dv">3</span>] <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
+</div>
+</div>
+<ol start="15" class="example" type="1">
+<li>Explain in a few sentences, what happened in the code above?</li>
+</ol>
+<blockquote class="blockquote">
+
+</blockquote>
+<ol start="16" class="example" type="1">
+<li>You try, create a list of five items and store it in a descriptive variable.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>myvalue <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Greece"</span>, <span class="st">"Bulgaria"</span>, <span class="st">"Serbia"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="built-in-functions" class="level3">
+<h3 class="anchored" data-anchor-id="built-in-functions">Built In Functions</h3>
+<p>R also has <strong>built in functions</strong>. We’ve already used a couple of these: <code>paste()</code> and <code>c()</code>. But there are others, like <code>sqrt()</code> which does what you think it does, finds the square root of a number.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 31.62278</code></pre>
+</div>
+</div>
+<p>Many functions have options that can be added to them. For example, the <code>round()</code> function allows you to include an option specifying how many digits to round to.</p>
+<p>You can run it without that option and it’ll use the default:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">15.492827349</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+</div>
+<p>Or we can tell it to round it to 2 decimal places.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">15.492827349</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.49</code></pre>
+</div>
+</div>
+<p>How would you know what options are available for each function in R? Every function and package in R comes with <strong>documentation</strong> or a <strong>manual</strong> that is built into R studio and can be pulled by by typing a question mark in front of the function in your console. These packages will commonly give you examples of how to use the function and syntax for doing so. They are incredibly useful.</p>
+<p>We can ask R to pull up the documentation like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>?<span class="fu">round</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="17" class="example" type="1">
+<li>Now you try, find the documentation for the function <code>signif()</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+</div>
+<p>In real life, you typically you wouldn’t want to store this code in your script file. You probably don’t need to pull up the documentation for the function every time you run that piece of code. But for the purposes of this worksheet we’re adding it to our <code>.Rmd</code> document.</p>
+<ol start="18" class="example" type="1">
+<li>Use the console to find the documentation for <code>floor()</code>? Try it and then tell me, what does that function do?</li>
+</ol>
+<blockquote class="blockquote">
+
+</blockquote>
+</section>
+<section id="data-frames-packages" class="level3">
+<h3 class="anchored" data-anchor-id="data-frames-packages">Data Frames &amp; Packages</h3>
+<p>R is the language of choice for most data scientists and that is because of its powerful suite of data analysis tools. Some are built into R, like <code>floor()</code> which we looked at above. But others come from packages that you have to install. Most programming languages have some sort of package system although every language calls it a slightly different thing. Ruby has gems, python has eggs, and php has libraries. In R these are called packages or libraries and they are hosted by the Comprehensive R Archive Network or more commonly, CRAN. CRAN is a network of ftp and web servers around the world that store identical, up-to-date, versions of code and documentation for R. You didn’t know it but you already used CRAN when you looked up the documentation for <code>floor()</code> above. If you go to the CRAN webpage and look at the <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html">list of available R packages</a> you’ll see just how many there are!</p>
+<p>So there are many packages but there are also some that are indispensable. You’ll use some packages over and over for this class. We’ll get into some of those in the next two worksheets but for now lets look at one basic package for data.</p>
+<p>Lets start with the <code>tibble()</code> package which allows you to create and work with <strong>data frames</strong>. What is a data frame? Think of it as a spreadsheet. Each column can contain data - including numbers, strings, and logical values.</p>
+<p>Lets load the <code>tibble()</code> package. If you have this package installed this line of code will work. If not, you’ll get an error that says something like: <code>## Error in library("tibble"): there is no package called 'tibble'</code>. If that’s the case (it probably is), then no worries - we can install it. To install a package run <code>install.packages("tibble")</code> in your console and R will download and install the package. (Remember this isn’t code that we want or need to store in our document, so run it in your console not in the <code>.Rmd</code> document.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The tibble package will allow you to create dataframes. Lets use some built in data in R to demonstrate this. This dataset contains the measurements in centimeters of sepal and petal width and length. Lets start by figuring out what kind of data iris is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+</div>
+<p>We can see that iris is a list. But we want to use the tibble package to turn it into a dataframe. Thats very easy, we can simply run:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 150 × 5
+   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+ 1          5.1         3.5          1.4         0.2 setosa 
+ 2          4.9         3            1.4         0.2 setosa 
+ 3          4.7         3.2          1.3         0.2 setosa 
+ 4          4.6         3.1          1.5         0.2 setosa 
+ 5          5           3.6          1.4         0.2 setosa 
+ 6          5.4         3.9          1.7         0.4 setosa 
+ 7          4.6         3.4          1.4         0.3 setosa 
+ 8          5           3.4          1.5         0.2 setosa 
+ 9          4.4         2.9          1.4         0.2 setosa 
+10          4.9         3.1          1.5         0.1 setosa 
+# ℹ 140 more rows</code></pre>
+</div>
+</div>
+<p>That is useful. But we can also create our own data frame from vectors. That means we can create the values in each field. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="at">y =</span> <span class="dv">1</span>, </span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="at">z =</span> x <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span> y</span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+      x     y     z
+  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     1     1     3
+2     2     1     5
+3     3     1     7
+4     4     1     9
+5     5     1    11</code></pre>
+</div>
+</div>
+<p>What is going on here? Each line within this function (x,y,z) creates a new column and determines the values in each row. So the first line creates five rows with values sequentially from 1 to 5. The second column contains only the value 1 in all five rows.</p>
+<ol start="19" class="example" type="1">
+<li>What is going on in row z? Can you explain the logic here?</li>
+</ol>
+<blockquote class="blockquote">
+
+</blockquote>
+</section>
+</section>
+<section id="loading-dataframes-from-packages" class="level2">
+<h2 class="anchored" data-anchor-id="loading-dataframes-from-packages">Loading Dataframes from Packages</h2>
+<p>Lets also install the data package that I’ve created for our class. This package contains a variety of historical datasets that you can use to complete your assignments this semester. However, this package is not on CRAN. That’s okay. We can still install it from GitHub. To do that we’ll need to use the <code>devtools</code> package. We’ll install devtools and then use it to install our class’s package which is hosted on GitHub.</p>
+<p>First, install the <code>devtools</code> package.</p>
+<p>Our class’s package is called <code>DigitalMethodsData</code> and its hosted on <a href="https://github.com/regan008/DigitalMethodsData">GitHub</a>. Use the directions on the repository page and what you learned about packages above to install this package.</p>
+<p>After installing the package, we should load it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DigitalMethodsData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What kind of datasets are available in this package? We can use the help documentation to find out.</p>
+<p>Run <code>help(package="DigitalMethodsData")</code> in your console to pull up a list of datasets included in this package.</p>
+<p>For demonstration purposes we’ll use the <code>gayguides</code> data here. Pull up the help documentation for this dataset. What does the documentation tell you abou the scope of this dataset?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package=</span><span class="st">"DigitalMethodsData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To use a dataset included in this package we first need to load it. We can do so like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(gayguides)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that you now have a loaded dataset in your environment pane. It shows us that there are 60,698 observations (rows) of data and 14 variables (columns).</p>
+<p>Let’s now look at our data. You can use the <code>head()</code> function to return the first part of an object or dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gayguides)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  X   ID        title                   description streetaddress
+1 1 3213       'B.A.'               (woods &amp; ponds)              
+2 2 2265 'B.A.' Beach                      2 mi. E.        Rte. 2
+3 3 3269 'B.A.' Beach            nr. Salt Air Beach              
+4 4 3388 'B.A.' Beach nr. Evergreen Floating Bridge              
+5 5 3508 'B.A.' Beach          (2 mi. E. on Rte. 2)              
+6 6 5116 'B.A.' Beach nr. Evergreen Floating Bridge              
+            type amenityfeatures           city state Year notes      lat
+1 Cruising Areas     Cruisy Area    Lake Placid    NY 1982       44.27949
+2 Cruising Areas     Cruisy Area           Troy    NY 1981       42.72841
+3 Cruising Areas     Cruisy Area Salt Lake City    UT 1981       40.74781
+4 Cruising Areas     Cruisy Area        Seattle    WA 1981       47.60621
+5 Cruising Areas     Cruisy Area           Troy    NY 1982       42.72841
+6 Cruising Areas     Cruisy Area        Seattle    WA 1983       47.60621
+         lon
+1  -73.97987
+2  -73.69178
+3 -112.18727
+4 -122.33207
+5  -73.69178
+6 -122.33207
+                                                                      status
+1 Location could not be verified. General city or location coordinates used.
+2 Location could not be verified. General city or location coordinates used.
+3 Location could not be verified. General city or location coordinates used.
+4 Location could not be verified. General city or location coordinates used.
+5 Location could not be verified. General city or location coordinates used.
+6 Location could not be verified. General city or location coordinates used.</code></pre>
+</div>
+</div>
+<p>That gives us the first 6 rows of data. Its really useful if you just want to peak into the dataset but don’t want to print out all 60k+ rows.</p>
+<ol start="20" class="example" type="1">
+<li>The default is to print six rows of data. Can you modify the above code to print out the first 10 rows?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gayguides)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  X   ID        title                   description streetaddress
+1 1 3213       'B.A.'               (woods &amp; ponds)              
+2 2 2265 'B.A.' Beach                      2 mi. E.        Rte. 2
+3 3 3269 'B.A.' Beach            nr. Salt Air Beach              
+4 4 3388 'B.A.' Beach nr. Evergreen Floating Bridge              
+5 5 3508 'B.A.' Beach          (2 mi. E. on Rte. 2)              
+6 6 5116 'B.A.' Beach nr. Evergreen Floating Bridge              
+            type amenityfeatures           city state Year notes      lat
+1 Cruising Areas     Cruisy Area    Lake Placid    NY 1982       44.27949
+2 Cruising Areas     Cruisy Area           Troy    NY 1981       42.72841
+3 Cruising Areas     Cruisy Area Salt Lake City    UT 1981       40.74781
+4 Cruising Areas     Cruisy Area        Seattle    WA 1981       47.60621
+5 Cruising Areas     Cruisy Area           Troy    NY 1982       42.72841
+6 Cruising Areas     Cruisy Area        Seattle    WA 1983       47.60621
+         lon
+1  -73.97987
+2  -73.69178
+3 -112.18727
+4 -122.33207
+5  -73.69178
+6 -122.33207
+                                                                      status
+1 Location could not be verified. General city or location coordinates used.
+2 Location could not be verified. General city or location coordinates used.
+3 Location could not be verified. General city or location coordinates used.
+4 Location could not be verified. General city or location coordinates used.
+5 Location could not be verified. General city or location coordinates used.
+6 Location could not be verified. General city or location coordinates used.</code></pre>
+</div>
+</div>
+<ol start="21" class="example" type="1">
+<li>Can you find the last 6 rows of data?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(gayguides)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          X    ID           title               description streetaddress
+60693 60693 PR351       Boccachio            (Natives only)              
+60694 60694 PR366       Boccachio            (Natives only)              
+60695 60695 PR377       Boccachio            (Natives only)              
+60696 60696 GU002   Mi Elena Club (Inquire locally) (Agana)          &lt;NA&gt;
+60697 60697 GU015 Star Cafe &amp; Bar Downtown, opp. Agana Loop          &lt;NA&gt;
+60698 60698 GU019 Star Cafe &amp; Bar Downtown, opp. Agana Loop          &lt;NA&gt;
+            type
+60693 Bars/Clubs
+60694 Bars/Clubs
+60695 Bars/Clubs
+60696 Bars/Clubs
+60697 Bars/Clubs
+60698 Bars/Clubs
+                                                                                  amenityfeatures
+60693                                                                                     (G),(*)
+60694                                                                                         (G)
+60695                                                                                         (L)
+60696                                                         (M) - Mixed Crowds - Some Straights
+60697 (M) - Mixed Crowds - Some Straights,(YC) - Young and/or collegiate types,(*) - Very popular
+60698 (M) - Mixed Crowds - Some Straights,(YC) - Young and/or collegiate types,(*) - Very popular
+          city state Year notes      lat       lon
+60693 Hato Ray    PR 1977       18.42258 -66.05096
+60694 Hato Ray    PR 1979       18.42258 -66.05096
+60695 Hato Ray    PR 1980       18.42258 -66.05096
+60696    Agana    GU 1980  &lt;NA&gt; 13.47628 144.75022
+60697    Agana    GU 1975  &lt;NA&gt; 13.47628 144.75022
+60698    Agana    GU 1974  &lt;NA&gt; 13.47628 144.75022
+                                                                          status
+60693 Location could not be verified. General city or location coordinates used.
+60694 Location could not be verified. General city or location coordinates used.
+60695 Location could not be verified. General city or location coordinates used.
+60696 Location could not be verified. General city or location coordinates used.
+60697 Location could not be verified. General city or location coordinates used.
+60698 Location could not be verified. General city or location coordinates used.</code></pre>
+</div>
+</div>
+<ol start="22" class="example" type="1">
+<li>Reflect on the previous two prompts. How did you figure these out?</li>
+</ol>
+<p>I got by with a little help from my friends.</p>
+<p>The <code>str()</code> function is another very useful function for understanding a dataset. It compactly displays the internal structure of an R object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(gayguides)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   60698 obs. of  14 variables:
+ $ X              : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ ID             : chr  "3213" "2265" "3269" "3388" ...
+ $ title          : chr  "'B.A.'" "'B.A.' Beach" "'B.A.' Beach" "'B.A.' Beach" ...
+ $ description    : chr  "(woods &amp; ponds)" "2 mi. E." "nr. Salt Air Beach" "nr. Evergreen Floating Bridge" ...
+ $ streetaddress  : chr  "" "Rte. 2" "" "" ...
+ $ type           : chr  "Cruising Areas" "Cruising Areas" "Cruising Areas" "Cruising Areas" ...
+ $ amenityfeatures: chr  "Cruisy Area" "Cruisy Area" "Cruisy Area" "Cruisy Area" ...
+ $ city           : chr  "Lake Placid" "Troy" "Salt Lake City" "Seattle" ...
+ $ state          : chr  "NY" "NY" "UT" "WA" ...
+ $ Year           : int  1982 1981 1981 1981 1982 1983 1983 1983 1983 1984 ...
+ $ notes          : chr  "" "" "" "" ...
+ $ lat            : num  44.3 42.7 40.7 47.6 42.7 ...
+ $ lon            : num  -74 -73.7 -112.2 -122.3 -73.7 ...
+ $ status         : chr  "Location could not be verified. General city or location coordinates used." "Location could not be verified. General city or location coordinates used." "Location could not be verified. General city or location coordinates used." "Location could not be verified. General city or location coordinates used." ...</code></pre>
+</div>
+</div>
+<p>There is a ton of useful info here. First, we see that this is a data.frame and that it has 60698 obs. of 14 variables. Second, we see the names of all the variables (columns) in the dataset. Lastly, it shows us what type of data is contained in each variable. For example, the variable <code>state</code> is a chr or character vector while <code>Year</code> (note the capitalization) is numeric.</p>
+<p>The <code>$</code> operator allows us to get a segment of the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gayguides<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "'B.A.'"       "'B.A.' Beach" "'B.A.' Beach" "'B.A.' Beach" "'B.A.' Beach"
+[6] "'B.A.' Beach"</code></pre>
+</div>
+</div>
+<p>While that’s useful, this particular dataset happens to be sorted by title. So the first rows are all labeled some version of B.A. beach. That’s not very useful. What if we want to see the 500th item in this list? Well, we can pull that up like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>gayguides<span class="sc">$</span>title[<span class="dv">500</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "'Rest Stop'"</code></pre>
+</div>
+</div>
+<ol start="23" class="example" type="1">
+<li>Break this down. Whats going on here? What do each of the elements of this code mean? (gayguides, $, title, and [500])</li>
+</ol>
+<p>Is this a means to search things?</p>
+<ol start="24" class="example" type="1">
+<li>The Year variable contains the year (numeric) of each entry. Can you find the earliest year in this dataset? (Using code, don’t cheat and use the documentation!)</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(gayguides<span class="sc">$</span>Year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1965</code></pre>
+</div>
+</div>
+<ol start="25" class="example" type="1">
+<li>How about the latest year?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(gayguides<span class="sc">$</span>Year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1985</code></pre>
+</div>
+</div>
+<ol start="26" class="example" type="1">
+<li>Add another dataset from <code>DigitalMethodsData</code>. How many observations are included in this dataset? Run through some of the examples from above to learn about the dataset.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package=</span><span class="st">"DigitalMethodsData"</span>)</span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"judges"</span>)</span>
+<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(judges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      nid  jid Last.Name First.Name Middle.Name Suffix Birth.Month Birth.Day
+1 1393931 3419    Abrams     Ronnie                             NA        NA
+2 1376976    1   Abruzzo    Matthew          T.                  4        30
+3 1376981    2   Acheson     Marcus      Wilson                  6         7
+4 1376986    3     Acker    William       Marsh    Jr.          10        25
+5 1376991    4  Ackerman     Harold      Arnold                  2        15
+6 1376996    5  Ackerman      James       Waldo                  1         1
+  Birth.Year   Birth.City Birth.State Death.Month Death.Day Death.Year
+1       1968     New York          NY          NA        NA         NA
+2       1889     Brooklyn          NY           5        28       1971
+3       1828   Washington          PA           6        21       1906
+4       1927   Birmingham          AL           6        21       2018
+5       1928       Newark          NJ          12         2       2009
+6       1926 Jacksonville          FL          11        23       1984
+   Death.City Death.State Gender Race.or.Ethnicity      Court.Type..1.
+1                         Female             White U.S. District Court
+2     Potomac          MD   Male             White U.S. District Court
+3  Pittsburgh          PA   Male             White U.S. District Court
+4                           Male             White U.S. District Court
+5 West Orange          NJ   Male             White U.S. District Court
+6 Springfield          IL   Male             White U.S. District Court
+                                                Court.Name..1.
+1    U.S. District Court for the Southern District of New York
+2     U.S. District Court for the Eastern District of New York
+3 U.S. District Court for the Western District of Pennsylvania
+4     U.S. District Court for the Northern District of Alabama
+5           U.S. District Court for the District of New Jersey
+6    U.S. District Court for the Southern District of Illinois
+  Appointment.Title..1. Appointing.President..1.
+1                 Judge             Barack Obama
+2                 Judge    Franklin D. Roosevelt
+3                 Judge      Rutherford B. Hayes
+4                 Judge            Ronald Reagan
+5                 Judge             Jimmy Carter
+6                 Judge              Gerald Ford
+  Party.of.Appointing.President..1. Reappointing.President..1.
+1                        Democratic                           
+2                        Democratic                           
+3                        Republican                           
+4                        Republican                           
+5                        Democratic                           
+6                        Republican                           
+  Party.of.Reappointing.President..1. ABA.Rating..1. Seat.ID..1.
+1                                          Qualified    NYSD2704
+2                                                       NYED0601
+3                                                       PAWD0106
+4                                          Qualified    ALND0404
+5                                     Well Qualified     NJD0505
+6                                     Well Qualified    ILSD0204
+  Statute.Authorizing.New.Seat..1. Recess.Appointment.Date..1.
+1                                                             
+2                     49 Stat. 659                            
+3                                                             
+4                                                             
+5                                                             
+6                                                             
+  Nomination.Date..1. Committee.Referral.Date..1. Hearing.Date..1.
+1          2011-07-28                  2011-07-28       2011-10-04
+2          1936-02-03                  1936-02-03                 
+3          1880-01-06                  1880-01-07                 
+4          1982-07-22                  1982-07-22       1982-08-11
+5          1979-09-28                  1979-09-28       1979-10-25
+6          1976-06-18                  1976-06-18       1976-06-30
+  Judiciary.Committee.Action..1. Committee.Action.Date..1. Senate.Vote.Type..1.
+1           Reported (favorably)                2011-11-03            Roll Call
+2           Reported (favorably)                1936-02-11                Voice
+3           Reported (favorably)                1880-01-14                Voice
+4           Reported (favorably)                1982-08-17                Voice
+5           Reported (favorably)                1979-10-30                Voice
+6           Reported (favorably)                1976-06-30                Voice
+  Ayes.Nays..1. Confirmation.Date..1. Commission.Date..1.
+1          96/2            2012-03-22          2012-03-23
+2                          1936-02-12          1936-02-15
+3                          1880-01-14          1880-01-14
+4                          1982-08-18          1982-08-18
+5                          1979-10-31          1979-11-02
+6                          1976-07-02          1976-07-02
+  Service.as.Chief.Judge..Begin..1. Service.as.Chief.Judge..End..1.
+1                                NA                              NA
+2                                NA                              NA
+3                                NA                              NA
+4                                NA                              NA
+5                                NA                              NA
+6                                NA                              NA
+  X2nd.Service.as.Chief.Judge..Begin..1. X2nd.Service.as.Chief.Judge..End..1.
+1                                     NA                                   NA
+2                                     NA                                   NA
+3                                     NA                                   NA
+4                                     NA                                   NA
+5                                     NA                                   NA
+6                                     NA                                   NA
+  Senior.Status.Date..1.                          Termination..1.
+1                                                                
+2             1966-02-15                                    Death
+3                        Appointment to Another Judicial Position
+4             1996-05-31                                    Death
+5             1994-02-15                                    Death
+6                                                    Reassignment
+  Termination.Date..1.                 Court.Type..2.
+1                                                    
+2           1971-05-28                               
+3           1891-02-09 U.S. Circuit Court (1869-1911)
+4           2018-06-21                               
+5           2009-12-02                               
+6           1979-03-31            U.S. District Court
+                                            Court.Name..2.
+1                                                         
+2                                                         
+3                U.S. Circuit Courts for the Third Circuit
+4                                                         
+5                                                         
+6 U.S. District Court for the Central District of Illinois
+  Appointment.Title..2. Appointing.President..2.
+1                                               
+2                                               
+3                 Judge        Benjamin Harrison
+4                                               
+5                                               
+6                 Judge      None (reassignment)
+  Party.of.Appointing.President..2. Reappointing.President..2.
+1                                                           NA
+2                                                           NA
+3                        Republican                         NA
+4                                                           NA
+5                                                           NA
+6               None (reassignment)                         NA
+  Party.of.Reappointing.President..2. ABA.Rating..2. Seat.ID..2.
+1                                  NA                           
+2                                  NA                           
+3                                  NA                1869CC30102
+4                                  NA                           
+5                                  NA                           
+6                                  NA                   ILCD0201
+  Statute.Authorizing.New.Seat..2. Recess.Appointment.Date..2.
+1                                                             
+2                                                             
+3                                                             
+4                                                             
+5                                                             
+6                       93 Stat. 6                            
+  Nomination.Date..2. Committee.Referral.Date..2. Hearing.Date..2.
+1                                                                 
+2                                                                 
+3          1891-01-23                  1891-01-24                 
+4                                                                 
+5                                                                 
+6                                                                 
+  Judiciary.Committee.Action..2. Committee.Action.Date..2. Senate.Vote.Type..2.
+1                                                                              
+2                                                                              
+3           Reported (favorably)                1891-02-03                Voice
+4                                                                              
+5                                                                              
+6                                                                              
+  Ayes.Nays..2. Confirmation.Date..2. Commission.Date..2.
+1                                                        
+2                                                        
+3                          1891-02-03          1891-02-03
+4                                                        
+5                                                        
+6                                              1979-03-31
+  Service.as.Chief.Judge..Begin..2. Service.as.Chief.Judge..End..2.
+1                                NA                              NA
+2                                NA                              NA
+3                                NA                              NA
+4                                NA                              NA
+5                                NA                              NA
+6                              1982                            1984
+  X2nd.Service.as.Chief.Judge..Begin..2. X2nd.Service.as.Chief.Judge..End..2.
+1                                     NA                                   NA
+2                                     NA                                   NA
+3                                     NA                                   NA
+4                                     NA                                   NA
+5                                     NA                                   NA
+6                                     NA                                   NA
+  Senior.Status.Date..2. Termination..2. Termination.Date..2.
+1                                                            
+2                                                            
+3                                  Death           1906-06-21
+4                                                            
+5                                                            
+6                                  Death           1984-11-23
+         Court.Type..3.                              Court.Name..3.
+1                                                                  
+2                                                                  
+3 U.S. Court of Appeals U.S. Court of Appeals for the Third Circuit
+4                                                                  
+5                                                                  
+6                                                                  
+  Appointment.Title..3. Appointing.President..3.
+1                                               
+2                                               
+3                 Judge        None (assignment)
+4                                               
+5                                               
+6                                               
+  Party.of.Appointing.President..3. Reappointing.President..3.
+1                                                           NA
+2                                                           NA
+3                 None (assignment)                         NA
+4                                                           NA
+5                                                           NA
+6                                                           NA
+  Party.of.Reappointing.President..3. ABA.Rating..3. Seat.ID..3.
+1                                  NA                           
+2                                  NA                           
+3                                  NA                    CA30101
+4                                  NA                           
+5                                  NA                           
+6                                  NA                           
+  Statute.Authorizing.New.Seat..3. Recess.Appointment.Date..3.
+1                                                             
+2                                                             
+3                     26 Stat. 826                            
+4                                                             
+5                                                             
+6                                                             
+  Nomination.Date..3. Committee.Referral.Date..3. Hearing.Date..3.
+1                                                                 
+2                                                                 
+3                                                                 
+4                                                                 
+5                                                                 
+6                                                                 
+  Judiciary.Committee.Action..3. Committee.Action.Date..3. Senate.Vote.Type..3.
+1                                                                              
+2                                                                              
+3                                                                              
+4                                                                              
+5                                                                              
+6                                                                              
+  Ayes.Nays..3. Confirmation.Date..3. Commission.Date..3.
+1                                                        
+2                                                        
+3                                              1891-06-16
+4                                                        
+5                                                        
+6                                                        
+  Service.as.Chief.Judge..Begin..3. Service.as.Chief.Judge..End..3.
+1                                NA                              NA
+2                                NA                              NA
+3                                NA                              NA
+4                                NA                              NA
+5                                NA                              NA
+6                                NA                              NA
+  X2nd.Service.as.Chief.Judge..Begin..3. X2nd.Service.as.Chief.Judge..End..3.
+1                                     NA                                   NA
+2                                     NA                                   NA
+3                                     NA                                   NA
+4                                     NA                                   NA
+5                                     NA                                   NA
+6                                     NA                                   NA
+  Senior.Status.Date..3. Termination..3. Termination.Date..3. Court.Type..4.
+1                                                                           
+2                                                                           
+3                                  Death           1906-06-21               
+4                                                                           
+5                                                                           
+6                                                                           
+  Court.Name..4. Appointment.Title..4. Appointing.President..4.
+1                                                              
+2                                                              
+3                                                              
+4                                                              
+5                                                              
+6                                                              
+  Party.of.Appointing.President..4. Reappointing.President..4.
+1                                                           NA
+2                                                           NA
+3                                                           NA
+4                                                           NA
+5                                                           NA
+6                                                           NA
+  Party.of.Reappointing.President..4. ABA.Rating..4. Seat.ID..4.
+1                                  NA                           
+2                                  NA                           
+3                                  NA                           
+4                                  NA                           
+5                                  NA                           
+6                                  NA                           
+  Statute.Authorizing.New.Seat..4. Recess.Appointment.Date..4.
+1                                                             
+2                                                             
+3                                                             
+4                                                             
+5                                                             
+6                                                             
+  Nomination.Date..4. Committee.Referral.Date..4. Hearing.Date..4.
+1                                                                 
+2                                                                 
+3                                                                 
+4                                                                 
+5                                                                 
+6                                                                 
+  Judiciary.Committee.Action..4. Committee.Action.Date..4. Senate.Vote.Type..4.
+1                                                                              
+2                                                                              
+3                                                                              
+4                                                                              
+5                                                                              
+6                                                                              
+  Ayes.Nays..4. Confirmation.Date..4. Commission.Date..4.
+1            NA                                          
+2            NA                                          
+3            NA                                          
+4            NA                                          
+5            NA                                          
+6            NA                                          
+  Service.as.Chief.Judge..Begin..4. Service.as.Chief.Judge..End..4.
+1                                NA                              NA
+2                                NA                              NA
+3                                NA                              NA
+4                                NA                              NA
+5                                NA                              NA
+6                                NA                              NA
+  X2nd.Service.as.Chief.Judge..Begin..4. X2nd.Service.as.Chief.Judge..End..4.
+1                                     NA                                   NA
+2                                     NA                                   NA
+3                                     NA                                   NA
+4                                     NA                                   NA
+5                                     NA                                   NA
+6                                     NA                                   NA
+  Senior.Status.Date..4. Termination..4. Termination.Date..4. Court.Type..5.
+1                                                                           
+2                                                                           
+3                                                                           
+4                                                                           
+5                                                                           
+6                                                                           
+  Court.Name..5. Appointment.Title..5. Appointing.President..5.
+1                                                              
+2                                                              
+3                                                              
+4                                                              
+5                                                              
+6                                                              
+  Party.of.Appointing.President..5. Reappointing.President..5.
+1                                                           NA
+2                                                           NA
+3                                                           NA
+4                                                           NA
+5                                                           NA
+6                                                           NA
+  Party.of.Reappointing.President..5. ABA.Rating..5. Seat.ID..5.
+1                                  NA             NA            
+2                                  NA             NA            
+3                                  NA             NA            
+4                                  NA             NA            
+5                                  NA             NA            
+6                                  NA             NA            
+  Statute.Authorizing.New.Seat..5. Recess.Appointment.Date..5.
+1                               NA                            
+2                               NA                            
+3                               NA                            
+4                               NA                            
+5                               NA                            
+6                               NA                            
+  Nomination.Date..5. Committee.Referral.Date..5. Hearing.Date..5.
+1                                                                 
+2                                                                 
+3                                                                 
+4                                                                 
+5                                                                 
+6                                                                 
+  Judiciary.Committee.Action..5. Committee.Action.Date..5. Senate.Vote.Type..5.
+1                                                                              
+2                                                                              
+3                                                                              
+4                                                                              
+5                                                                              
+6                                                                              
+  Ayes.Nays..5. Confirmation.Date..5. Commission.Date..5.
+1            NA                                          
+2            NA                                          
+3            NA                                          
+4            NA                                          
+5            NA                                          
+6            NA                                          
+  Service.as.Chief.Judge..Begin..5. Service.as.Chief.Judge..End..5.
+1                                NA                              NA
+2                                NA                              NA
+3                                NA                              NA
+4                                NA                              NA
+5                                NA                              NA
+6                                NA                              NA
+  X2nd.Service.as.Chief.Judge..Begin..5. X2nd.Service.as.Chief.Judge..End..5.
+1                                     NA                                   NA
+2                                     NA                                   NA
+3                                     NA                                   NA
+4                                     NA                                   NA
+5                                     NA                                   NA
+6                                     NA                                   NA
+  Senior.Status.Date..5. Termination..5. Termination.Date..5. Court.Type..6.
+1                                                                           
+2                                                                           
+3                                                                           
+4                                                                           
+5                                                                           
+6                                                                           
+  Court.Name..6. Appointment.Title..6. Appointing.President..6.
+1                                                              
+2                                                              
+3                                                              
+4                                                              
+5                                                              
+6                                                              
+  Party.of.Appointing.President..6. Reappointing.President..6.
+1                                                           NA
+2                                                           NA
+3                                                           NA
+4                                                           NA
+5                                                           NA
+6                                                           NA
+  Party.of.Reappointing.President..6. ABA.Rating..6. Seat.ID..6.
+1                                  NA             NA            
+2                                  NA             NA            
+3                                  NA             NA            
+4                                  NA             NA            
+5                                  NA             NA            
+6                                  NA             NA            
+  Statute.Authorizing.New.Seat..6. Recess.Appointment.Date..6.
+1                               NA                            
+2                               NA                            
+3                               NA                            
+4                               NA                            
+5                               NA                            
+6                               NA                            
+  Nomination.Date..6. Committee.Referral.Date..6. Hearing.Date..6.
+1                                                                 
+2                                                                 
+3                                                                 
+4                                                                 
+5                                                                 
+6                                                                 
+  Judiciary.Committee.Action..6. Committee.Action.Date..6. Senate.Vote.Type..6.
+1                                                                              
+2                                                                              
+3                                                                              
+4                                                                              
+5                                                                              
+6                                                                              
+  Ayes.Nays..6. Confirmation.Date..6. Commission.Date..6.
+1            NA                                          
+2            NA                                          
+3            NA                                          
+4            NA                                          
+5            NA                                          
+6            NA                                          
+  Service.as.Chief.Judge..Begin..6. Service.as.Chief.Judge..End..6.
+1                                NA                              NA
+2                                NA                              NA
+3                                NA                              NA
+4                                NA                              NA
+5                                NA                              NA
+6                                NA                              NA
+  X2nd.Service.as.Chief.Judge..Begin..6. X2nd.Service.as.Chief.Judge..End..6.
+1                                     NA                                   NA
+2                                     NA                                   NA
+3                                     NA                                   NA
+4                                     NA                                   NA
+5                                     NA                                   NA
+6                                     NA                                   NA
+  Senior.Status.Date..6. Termination..6. Termination.Date..6.
+1                                                            
+2                                                            
+3                                                            
+4                                                            
+5                                                            
+6                                                            
+  Other.Federal.Judicial.Service..1. Other.Federal.Judicial.Service..2.
+1                                                                      
+2                                                                      
+3                                                                      
+4                                                                      
+5                                                                      
+6                                                                      
+  Other.Federal.Judicial.Service..3. Other.Federal.Judicial.Service..4.
+1                                                                      
+2                                                                      
+3                                                                      
+4                                                                      
+5                                                                      
+6                                                                      
+                                                 School..1. Degree..1.
+1                                        Cornell University       B.A.
+2                                       Brooklyn Law School      LL.B.
+3 Washington College (now Washington and Jefferson College)       B.A.
+4                               Birmingham-Southern College       B.A.
+5                           Rutgers School of Law -- Newark      LL.B.
+6                                      Marquette University       B.S.
+  Degree.Year..1.                      School..2. Degree..2. Degree.Year..2.
+1            1990                 Yale Law School       J.D.            1993
+2            1910                                                           
+3            1845                        Read law                       1852
+4            1949                 Yale Law School      LL.B.            1952
+5            1951                                                           
+6            1947 Marquette University Law School       J.D.            1949
+  School..3. Degree..3. Degree.Year..3. School..4. Degree..4. Degree.Year..4.
+1                                                                          NA
+2                                                                          NA
+3                                                                          NA
+4                                                                          NA
+5                                                                          NA
+6                                                                          NA
+  School..5. Degree..5. Degree.Year..5.
+1                                    NA
+2                                    NA
+3                                    NA
+4                                    NA
+5                                    NA
+6                                    NA
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             Professional.Career
+1                                                                                          Law clerk, Hon. Thomas P. Griesa, U.S. District Court, Southern District of New York, 1993-1994; Private practice, New York City, 1994-1998, 2008-2012; Assistant U.S. attorney, Southern District of New York, 1998-2008; acting chief, General Crimes Unit, 2004-2005; chief, General Crimes Unit, 2005-2007; deputy chief, Criminal Division, 2007-2008; Lecturer-in-law, Columbia University School of Law, 2008-
+2                                                                                                                                                                                                                                                                                                                                                                                                                                                                Private practice, Brooklyn, New York, 1910-1936
+3                                                                                                                                                                                                                                                                                                                                                                                                                                                          Private practice, Pittsburgh, Pennsylvania, 1852-1880
+4                                                                                                                                                                                                                                                                                                                                                                                                                     U.S. Army private first class, 1946-1947; Private practice, Birmingham, Alabama, 1952-1982
+5                                                                                                                                                                 Private practice, New Jersey, 1951-1954; Judge, Compensation Court of the State of New Jersey, 1955-1965; Judge, Union County [New Jersey] District Court, 1965-1970; Judge, Union County [New Jersey] Court, 1970-1973; Judge, Superior Court of New Jersey, 1973-1979; Law Division, 1973-1975; Chancery Division, General Equity, 1975-1979
+6 Private practice, Sangamon County, Illinois, 1949-1952; U.S. Navy, 1944-1946, 1952-1954; Assistant state's attorney, Sangamon County, Illinois, 1954-1956; State's attorney, Sangamon County, Illinois, 1956-1960; Private practice, Sangamon County, Illinois, 1960-1971; Corporation counsel, Springfield, Illinois, 1961-1962; Assistant treasurer, State of Illinois, 1963-1964; Deputy attorney general, State of Illinois, 1968-1971; Judge, Illinois Circuit Court, Seventh Judicial Circuit, 1971-1976
+  Other.Nominations.Recess.Appointments
+1                                      
+2                                      
+3                                      
+4                                      
+5                                      
+6                                      </code></pre>
+</div>
+</div>
+<ol start="27" class="example" type="1">
+<li>What did you learn about the dataset? What can you tell me about it?</li>
+</ol>
+<p>It is an alphabetized list of federal judges in the US.</p>
+<p>CONGRATS! You’ve completed your first worksheet for Digital Methods II. That wasn’t so bad, right?</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
