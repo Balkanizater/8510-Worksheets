@@ -1,6 +1,6 @@
 ---
 title: 'Worksheet 6: Text Analysis'
-author: ''
+author: 'Alexander Billinis'
 date: ''
 ---
 
@@ -13,7 +13,7 @@ Text analysis is an umbrella for a number of different methodologies. Generally 
   1. Acquiring a corpus
   2. Preparing the text or Pre-processing
   3. Choosing an analytical tool 
-    * (There are many different tools or methods for text analysis. Take a minute and Google        each of these methodologies: tf-idf, topic modeling, sentiment analysis, word vector            analysis, n-grams)
+    * (There are many different tools or methods for text analysis. Take a minute and Google each of these methodologies: tf-idf, topic modeling, sentiment analysis, word vector analysis, n-grams)
   4. Analyzing the results
   
 In this worksheet we are focusing on basic text analysis. We'll learn how to load textual data into R, how to prepare it, and then how to analyze it using tf-idf or term-frequency according to inverse document frequency. 
@@ -55,7 +55,7 @@ What this does is create a new directory (sotu_files) and adds each State of the
 
 Now lets load all these texts into R using the `readtext()` function. First look up the documentation for this function and read about it. 
 ```{r}
-sotu_texts <- readtext(file_paths)
+sotu_texts <- readtext("sotu_files/")
 ```
 
 Take a look at sotu_texts now. Notice that we have two columns, one filled with the text, and one with a document id. 
@@ -102,7 +102,8 @@ The function `unnest_tokens()` also has an option called token. Tokenizing by wo
 
 (@)Use the documentation to tokenize the dataset into sentences: 
 ```{r}
-
+tidy_sotusentences <- sotu_whole %>% unnest_tokens(sentence, text, "sentences")
+tidy_sotusentences 
 ```
 
 We've talked about n-grams loosely in class. But lets define it more formally. An n-gram is a contiguous sequence of n items from a given sample of text or speech. The n stands for the number of items. So for example, a bi-gram is sets of two words. 
@@ -116,14 +117,14 @@ A tri-gram would look like this:
 We can use unnest_tokens() to create n-grams for us. To do that we just have to add an extra option that defines n. 
 ```{r}
 sotu_bigrams <- sotu_whole %>%
-  unnest_tokens(bigram, text, token = "ngrams", n = 2)
+  unnest_tokens(bigram, text, "ngrams", n = 2)
 
 head(sotu_bigrams$bigram)
 ```
 
 (@) Use `unest_tokens()` to create tri-grams. 
 ```{r}
-
+sotu_trigrams <- sotu_whole %>% unnest_tokens(trigram, text, token = "ngrams", n = 3)
 ```
 
 ### Stopwords
@@ -189,7 +190,7 @@ tidy_sotu <- sotu_whole %>%
 ```
 (@) Before we move forward, take a minute a describe the chunk of code you just ran. What does each section do and how does it reflect the workflow for a topic modeling project? What are the important steps that are unique to topic modeling? 
 
->
+>#We have arranged sotu data to be readable and to have stopwords inserted in it. Basically in one program we redid everything we had done in the previous parts of the worksheet.
 
 
 The most basic kind of analysis we might be interested in doing is counting words. We can do that easily using the `count()` function: 
@@ -228,11 +229,15 @@ tidy_sotu %>%
 
 (@) Think back to the metadata that we loaded about these speeches. Why are more modern president's state of the union addresses shorter? 
 
->
+>Probably because our attention spans are shorter in general, and probably in the case of the previous President it reflects his particularly low level of concentration. However, Trump is actually around the middle in terms of SOTU length, Presidents Washington and Adams are the shortest.
 
 (@) Filter the dataset to address this discrepancy and the recreate these statistics: 
 ```{r}
-
+average.word <- tidy_sotu %>% group_by(sotu_type, doc_id, president) %>% 
+  count(doc_id)  %>% 
+  group_by(sotu_type,  president) %>% 
+  summarize(avg_words = mean(n)) %>% 
+  arrange(desc(avg_words))
 ```
 
 ### Term Frequency
@@ -262,7 +267,7 @@ tidy_sotu %>%
 ```
 (@) The code above is commented to help you follow it. Walk through the code above, and explain what each line does in your own words. If its a function you are unfamiliar with, look up the documentation.
 
-> 
+> So, what is going on here is that we are analyzing now often the words are used, by President, by the total number of words by doc.
 
 ### TF-IDF
 
@@ -298,10 +303,22 @@ Lets look at what the words with the highest tf-idf score are.
 sotu.tf.idf %>% arrange(desc(tf_idf))
 ```
 
-(@) Pick a president who served more than one term. Filter the dataset and generate both raw word counts and tf-idf scores for that president. What words are most significant in each method? Why and what does that tell you about that president? 
+(@) Pick a president who served more than one term. Filter the dataset and generate both raw word counts and tf-idf scores for that president. What words are most significant in each method? Why and what does that tell you about that president? #Empower comes out as the most significant word, when using tf-idf.
+
 
 ```{r}
+wbush.count <- tidy_sotu %>% 
+  filter(president == "George W. Bush") %>% 
+  count(word, sort= TRUE)
 
+wbush.tfidf <- tidy_sotu %>% 
+  filter(president == "George W. Bush") %>% 
+  group_by(doc_id, word) %>% 
+  count(doc_id, word, sort = TRUE)  %>%  
+  bind_tf_idf(doc_id, word, n)
+
+head(wbush.count)
+head(wbush.tfidf)
 ```
 
 ### Co-Occurance
@@ -336,23 +353,114 @@ sotu_word_pairs %>%
 ```
 (@) Create a network graph that shows the relationship between words that appear between 125 and 175 times.
 ```{r}
-
+sotu_word_pairs %>% 
+filter(n >= 125 & n <= 175) %>%  # only word pairs that occur 200 or more times
+  graph_from_data_frame() %>% #convert to graph
+  ggraph(layout = "fr") + # place nodes according to the force-directed algorithm of Fruchterman and Reingold
+  geom_edge_link(aes(edge_alpha = n, edge_width = n), edge_colour = "tomato") +
+  geom_node_point(size = 5) +
+  geom_node_text(aes(label = name), repel = TRUE, 
+                 point.padding = unit(0.2, "lines")) +
+  theme_void()
 ```
 
-## Analyzing Historical Journals
+## Analyzing Historical Newspapers About Buffalo Bill
 
-In the github repository below I have included the text and metadata for a journal called _Mind and Body_ which ran from the 1890s until the late 1930s and chronicled the development of the physical education profession. This dataset was OCR'd from copies stored in Google Books. Using the metadata provided and the raw text files can you use what you learned above to analyze these texts? What historical conclusions might you be able to draw?
+To practice text analysis this week you will be helping Dr. Seefeldt with his research. In the github repository below I have included a metadata file containing all of the associated info from each article and a txt folder with each text file. 
 
+The dataset is described by Dr. Seefeldt this way: 
+> The project staff identified 99 visits to Indiana communities, some of which included performances spanning two or more days.  We located and captured a total of 720 Indiana newspaper pieces, including 273 articles promoting specific Wild West performances, 74 substantive pieces documenting locally-based reception to these performances, and 373 extraneous items, including advertisements, images, and reprints of articles generated elsewhere.  In total, the team transcribed approximately 740 items (R = Reception; P = Promotion; E = Extraneous)
+
+Use this link to read more about the project and the historical context: [https://docs.google.com/document/d/1LnmyCob5zc984EkMAx3sXlXQqhNbm9O8XV4O3HrQUbQ/edit?usp=sharing](https://docs.google.com/document/d/1LnmyCob5zc984EkMAx3sXlXQqhNbm9O8XV4O3HrQUbQ/edit?usp=sharing)
+
+You should use the rest of this worksheet to practice text analysis (and R more broadly) by exploring this dataset. Using the metadata provided and the raw text files can you use what you learned above to analyze these texts? What historical conclusions might you be able to draw? Perform the textual analysis and then write up your findings for Dr. Seefeldt. What might he be able to draw from this analysis? I will then take your work, compile it, and share it with him. Here are 3 research questions to get started. You can use one of these or come up with your own. 
+
+* Is there a difference in promotion language vs. reception language. In other words, what was BBWW selling and what did Indiana newspapers find remarkable.
+* Can we detect some change over time in promotion language and reception language (marketing and reviewing)? Were there types of characters, scenarios, action promised in promotional material and/or noted in reviews earlier vs later?
+* What can be gleaned from the items tagged as extraneous as far as topics? These are news items that are somehow related to BBWW. Crime, finances, celebrity, etc.
+
+
+Write up a research plan in the space below. What are you looking to explore?
+
+>My plan is to segment out promotion vs. research topics and find different words in each.
+
+Lets download the data. 
 ```{r}
 #| eval: false
 #zip file of all the .txt files. One for each issue. 
-download.file("https://github.com/regan008/8510-TextAnalysisData/blob/main/txt.zip?raw=true", "MindAndBody.zip")
-unzip("MindAndBody.zip")
-
-# Metadata that includes info about each issue.
-metadata <- read.csv("https://raw.githubusercontent.com/regan008/8510-TextAnalysisData/main/Metadata.csv")
+download.file("https://github.com/dseefeldt/IndianaNewspapers/raw/main/bb-txt.zip", "bb-txt.zip")
+unzip("bb-txt.zip")
+```
+```{r}
+# Metadata that includes info about each article.
+bb.metadata <- read.csv("https://raw.githubusercontent.com/dseefeldt/IndianaNewspapers/main/metadata.csv")
 ```
 
-(@) Add code chunks below and intersperse text to explain what you are doing and why. 
+(@) There are a few problems with this metadata from a tidy data perspective. First the date column isn't useful for assessing change over time. Can you split it into 3 columns one for year, month, and day? This will be useful if you want to try and identify change over time. Use the Date column not the FullDate column. This column is messy and you'll need to clean it up in order to have useful data. 
+```{r}
+library(dplyr)
+bb.metada.test <- bb.metadata %>% separate(Date, c("Month", "Day", "Year"))
+
+dates.incorrect <- bb.metada.test %>% filter(Day == "May" | Day == "Jul" | Day == "Jun")
+bad.months <- c("May", "Jul", "Jun")
+dates.correct <- bb.metada.test %>% filter(!Day %in% bad.months)
+dates.incorrect <- dates.incorrect %>% rename("month" = "Day")
+dates.incorrect <- dates.incorrect %>% rename("day" = "Month")
+dates.incorrect <- dates.incorrect %>% rename("Day" = "day") %>% rename("Month" = "month")
+
+bb.metadata <- rbind(dates.correct, dates.incorrect)
+```
+
+(@) Now lets load the BB data. This happens in a slightly different way than with the SOTU data since its local data and not data from an R package. 
+```{r}
+data_dir <- paste(getwd(), "/txt", sep = "")
+bb <- readtext(paste0(data_dir, "/*.txt"))
+```
+
+(@) Now you need to join this with the metadata for each file. Note that doc_id and Filename are the same value. How would you join two datasets together in R so that you can proceed with textual analysis? 
+```{r}
+bb.whole <- 
+ # sort metadata
+  bind_cols(bb.metadata, bb) %>% # combine with texts
+  as_tibble() # co
+
+```
+
+(@) Now you can begin your textual analysis for Dr. S. Add code chunks below and intersperse text to explain what you are doing and why in the text of the worksheet. 
+```{r}
+bb_whole_tidy <- bb.whole %>%
+  unnest_tokens(word, text)  %>% #creates a new data frame with each text file broken into tokens
+  anti_join(stop_words)# eliminates stop words
+bb.whole.n.count <- bb_whole_tidy %>%
+  count(word, sort = TRUE) #just counting words to get my bearings
+
+
+```
+
+```{r}
+bb.filter.p <- bb_whole_tidy %>% filter(R_P_E == "P")
+#so now we have filtered out P.
+```
+
+
+```{r}
+bb_tf_idf <- bb_whole_tidy %>% count(Filename, word, sort = TRUE) %>% 
+  bind_tf_idf(word, Filename, n)
+
+bb_tf_idf %>% arrange (desc(tf_idf))
+
+```
+
+
+(@) Finally, when you are all done. Write up your findings. What research question did you focus on and what did you learn? 
+
+I focused on the promotion items in your dataset. In order to make the dataset readable, I had to make all dates conform to one format. After this correction, I started to focus on all of the "P" (Promotion) items.
+
+I used the tf_idf function to create a table of all of the promotion items. This analysis will show term frequency for a given word, along with the how common or rare it is across documents. I think that this information, in the hands of a subject matter expert with contextual knowledge of the corpus, will be very useful.
+
+
+
+
+
 
 
