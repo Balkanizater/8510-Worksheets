@@ -1,0 +1,73 @@
+---
+title: "Exploratory Data Analysis Checklist"
+author: "Alex Billinis"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Step 1: Formulate your Question. For this exercise, this is my question: What means of attack sank the Greek Merchant Ships in World War Two. 
+
+
+I tidied up all dataset entries to conform to specific, searchable categories. For example, take out what Uboat sank the ship, but how? Topedo, surface shelling, or was it aerial attack, or mine?
+```
+
+Step 2: Read In Your Data. For this exercise, I will use the "Greek Ships Sunk Masterfile" dataset I compiled. 
+
+```{r}
+library(readr)
+read_csv(Greek_Ships_Sunk_MasterfileEXCEL)
+```
+
+Step 3: Check the packaging. This means, lets find out some of the features of the dataset, such as the numbers of rows and colums. For that we will use nrow() and ncol().
+
+```{r}
+nrow(Greek_Ships_Sunk_MasterfileEXCEL)
+ncol(Greek_Ships_Sunk_MasterfileEXCEL)
+```
+
+Step 4: Run str(). This is used as a further tidying up of your dataset, in order to insure that each of the columns are correctly specified. A bit of up front work to make usage of the dataset easier.
+
+```{r}
+str(Greek_Ships_Sunk_MasterfileEXCEL)
+```
+
+Step 5: Look at the Top and Bottom of Your Data. This is a safeguard to ensure that the data was read in properly. This is done by using the head() and tail() functions.
+
+```{r}
+head(Greek_Ships_Sunk_MasterfileEXCEL)
+
+```
+
+```{r}
+tail(Greek_Ships_Sunk_MasterfileEXCEL)
+```
+
+Step 6: Check those "n's". Lets get our total number of events.
+
+```{r}
+Greek_Ships_Sunk_MasterfileEXCEL %>% filter(...6) %>% summarise(count = (n))
+```
+
+
+Step 7: Validate with at least one external data source. 
+
+I have read various sources with similar conclusions on number of ships and individual events.
+
+Step 8: Try the easy solution first. Go straight to the data.
+
+```{r}
+Greek_Ships_Sunk_MasterfileEXCEL %>% group_by(...6) %>% summarise(count = n())
+```
+
+Step 9: Challenge your solution. In this way, we can look at a particular event, "Aerial Bombardment" and plot it against the year it occurred. What we will see is that the aerial bombardments took place near land at a time when Germans had air superiority over all of Europe except Britain.
+
+```{r}
+Greek_Ships_Sunk_MasterfileEXCEL %>% group_by(...6, ...13) %>% filter(...6 == "Aerial Bombing") %>%                   summarise(count = n())
+```
+
+
+Step 10: Do you have the right data? Yes, the dataset does provide the necessary data to answer the question. Do you need other data? Certainly, because context is key. In this case, even a map and dates will answer the question, and we can take both dates and we have coordinates which we can plot on a map. Do we have the right question? Definitely, and the data helps with this because the richness of the data set helps to explain what one column alone cannot.
