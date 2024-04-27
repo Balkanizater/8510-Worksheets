@@ -36,6 +36,10 @@ Now we have latitude and longitude coordinates for our data.
 
 (@) Use this approach to geocode the `UndergroundRR` data. 
 ```{r}
+library(DigitalMethodsData)
+data("UndergroundRR")
+geo.underground <- undergroundRR %>% geocode(city = City, state = State, method='osm', lat = latitude, long = longitude)
+head(geo.underground)
 
 ```
 
@@ -43,11 +47,16 @@ Now we have latitude and longitude coordinates for our data.
 (@) Geocode the Boston Women Voters dataset. Note that the data does include street addresses but because they are broken into parts - street address number, street, etc - you'll need to combine them into a full address to pass to the geocoding function. 
 ```{r}
 data("BostonWomenVoters")
+BWV <- BostonWomenVoters[1:50,]
+BWV.2 <- BWV %>% mutate(location = paste0(Street.Number.on.April.1, " ", Street.of.Residence.on.April.1, "," , "Boston, MA"))
+
+
+BWV.Coord. <- BWV.2 %>% geocode(location, method = 'osm', lat = latitude, long = longitude) 
 ```
 
 (@) As mentioned above - there are many ways to make a map in R. The `ggmap()` package has a function called `qmplot()` which allows for the quick plotting of maps with data. Look up the documentation for this package and use it to create a plot of the recreational data that we gecode above.
 ```{r}
-
+BostonWomenVoters %>% qmplot(Occupation, Volume)
 ```
 
 ### Maps with `ggplot()`
@@ -58,7 +67,7 @@ First we need to get a basemap. For this example we'll use the `map_data()` func
 
 (@) Look at the documentation for `map_data()`. Which geographies does this package provide access to?
 
->
+>map_data() can upload all sorts of maps, from various continents, states countries. It is part of the ggplot2 package.
 
 Lets load the base map data for the US. 
 ```{r}
@@ -67,7 +76,7 @@ usa <- map_data("state")
 
 (@) `map_data()` generates a data frame. Take a look at this data frame, what types of data are included? 
 
-> 
+> US map showing the various states. It tells us about all geographic enitites by providing latitude and longitude information.
 
 
 We can now pass this data to ggplot to create a simple basemap. When we wanted to create a bar plot using `ggplot()` we called `geom_bar`. When we wanted to create a line chart we used `geom_point()` and `geom_line()`. The sample principle applies here and `ggplot()` provides a geom for maps.
@@ -84,6 +93,9 @@ gayguides <- gayguides %>% filter(Year == 1965)
 
 And then we can use the same mapping code from above but this time we're going to add an additional geom -- `geom_point()` which will point to each of our locations from 1965. 
 ```{r}
+library(DigitalMethodsData)
+data("gayguides")
+
 ggplot() + 
   geom_map( data = usa, map = usa, aes(long, lat, map_id=region)) +
   geom_point(data = gayguides, mapping = aes(x=lon, y=lat))
@@ -91,18 +103,43 @@ ggplot() +
 
 (@) This map looks slightly funny, but that is because the data includes entries outside of the contiguous United States. Try filtering out those entries and mapping this again. Can you change the color or size of the points? Can you add a title?
 ```{r}
-
+ContinentalUS <- usa %>% filter(region != "Alaska Territory" | region != "Hawaii Territory")
+continentalGG <- gayguides %>% filter(state != "AK") %>% filter(state != "HI")
+ggplot() + 
+  geom_map( data = ContinentalUS, map = ContinentalUS, aes(long, lat, map_id=region), fill = "magenta") +
+  geom_point(data = continentalGG, mapping = aes(x=lon, y=lat)) +
+labs(title = "Gayguides Continental USA")
+```
 ```
 
 (@) Can you map just locations in South Carolina (on a basemap of SC)? 
-```{r}
 
+```{r}
+library(ggplot2)
+library(maps)
+SCmap <- map_data("state", state = "SC")
+SCdata <- gayguides %>%
+  filter(state == "SC")
+ggplot() +
+  geom_polygon(data = SCmap, aes(x = long, y = lat, group = group), fill = "purple", color = "white") +
+  geom_point(data = SCdata, aes(x = lon, y = lat), color = "lime green", size = 0.25) +
+  ggtitle("GG Locations in South Carolina") +
+  theme_minimal()
 ```
+
+
 
 (@) Create a map that uses your geocoded data from the Boston Women Voters dataset. 
 ```{r}
+BWV <- BostonWomenVoters[1:50,]
 
+BWV.2 <- BWV %>% mutate(location = paste0(Street.Number.on.April.1, " ", Street.of.Residence.on.April.1, "," , "Boston, MA"))
+BWV.Coord. <- BWV.2 %>% geocode(location, method = 'osm', lat = latitude, long = longitude) 
+ggplot() + 
+  geom_map( data = , map = usa, aes(long, lat, map_id=region), fill = "magenta") +
+  geom_point(data = gayguides, mapping = aes(x=lon, y=lat))
 ```
+
 
 Lets return to the recreational data for a minute.
 
@@ -127,10 +164,9 @@ ggplot() +
 
 ```{r}
 library(readr) #you may have to install it using `install.packages()`. 
-library(rgdal)
 library(sf)
-library(maptools)
 library(ipumsr)
+library(tidyverse)
 
 #NHGIS data is stored in zip files. R has functions for dealing with these but we still need to download the file to our server. Here we're going to write a function that will create a new directory, download the data, and rename it. 
 dir.create("data/", showWarnings = FALSE)
@@ -145,45 +181,72 @@ get_data()
 nhgis_csv_file <- "data/nhgis_data.zip"
 nhgis_shp_file <- "data/nhgis_simplified_shape.zip"
 
-#load the data and shape file into read_nhgis_sf
-nhgis <- read_nhgis_sf(
-  data_file = nhgis_csv_file,
+#load the shape file and then the data file into read_nhgis_sf
+nhgis_shp <- read_ipums_sf(
   shape_file = nhgis_shp_file
 )
+nhgis_data <- read_nhgis(nhgis_csv_file)
+
+#Use the ipums join file to join both the data and shape file together.
+nhgis <- ipums_shape_full_join(nhgis_data, nhgis_shp, by = "GISJOIN")
 
 #filter nhgis so that the map focuses on the 48 contiguous states. 
-nhgis <- nhgis %>% filter(STATENAM != "Alaska Territory" & STATENAM != "Hawaii Territory")
+nhgis <- nhgis %>% filter(STATE != "Alaska Territory" & STATENAM != "Hawaii Territory")
 
 #plot 
 ggplot(data = nhgis, aes(fill = AZF001)) +
   geom_sf() 
 
 ```
-(@) In the code above, why filter out Hawaii and Alaska? Try uncommenting that line and rerunning the code. What happens? Why might we want to do this? Why might we not want to do this? How does it shape the interpretation?
->
+(@) In the code above, why filter out Hawaii and Alaska? Try commenting out that line and rerunning the code. What happens? Why might we want to do this? Why might we not want to do this? How does it shape the interpretation?
+>The map is easier to read since it does not have to include those two geographically separated states.
 
-This is a great start. But using AZF001 (Native born males) as the fill does not create a useful visualization. It doesn't give us a sense of the proportion of that data. What would be much better, is if we knew what percentage of the total population foreign born males represented. To get that we have to calculate it. The next few questions will walk build on the code above and walk you through doing this.
+This is a great start. But using AZF001 (Native born males) as the fill does not create a useful visualization. It doesn't give us a sense of the proportion of that data. There are multiple problems with the map as it is, but one is that the color scale makes this incredibly hard to read. We can fix that by using a scale to break the values of AZF001 into bins and assign each a color. R has a function for this. It comes from the scales pacakge which you may need to install.
+
+```{r}
+library(scales)
+ggplot(data = nhgis, aes(fill = AZF001)) +
+  geom_sf() + scale_fill_distiller(name="Native Born Males", palette = "Spectral" , breaks = pretty_breaks(n = 10))
+```
+```{r}
+```{r}
+
+```
+
+```
+
+This is now much more readable but the numbers represented are simply the raw population count. That may be fine depending on your question but what would be much better, is if we knew what percentage of the total population foreign born males represented. To get that we have to calculate it. The next few questions will walk build on the code above and walk you through doing this.
 
 (@) First, create a variable called total_male_pop, with the total foreign and native born male population by summing the variables AZF001 and AZF003. 
 ```{r}
+library(dplyr)
+nhgis <- nhgis %>%
+  mutate(total_male_pop = AZF001 + AZF003)
 
 ```
 
 (@) Now, use the total_male_pop variable and create a variable for the the percentage of foreign born males.
 ```{r}
-
+nhgis <- nhgis %>%
+  mutate(percentageforeignbornmales = (AZF003 / total_male_pop) * 100)
 ```
 
 (@) Now map your result. You'll want to replicate the code from the example above, but this time add another layer to the plot - a scale. Here we'll use this scale `scale_fill_continuous("", labels = scales::percent)`
 
 Before you write that code, look up the documentation for the above code (and look at the examples). What does it do? 
-
->
+Scale Fill Continuous modifies the "gradient scale of continuous fill aesthetics in a plot."
 
 Now create the map: 
 ```{r}
-
+library(ggplot2)
+library(scales)
+ggplot(data = nhgis, aes(fill = percentageforeignbornmales)) +
+  geom_sf() +
+  scale_fill_continuous("", labels = percent) +
+  ggtitle("Percentage: Foreign Born Males") +
+  theme_minimal()
 ```
+
 
 ### Leaflet
 
@@ -212,18 +275,77 @@ leaflet(data=rec.data.coordinates) %>% addTiles() %>% addMarkers(~longitude, ~la
 
 (@) Use leaflet to map a dataset of your choice: 
 ```{r}
+library(leaflet)
+library(DigitalMethodsData)
+
+
+```{r}
+library(leaflet)
+library(DigitalMethodsData)
+data("gayguides")
+colnames(gayguides)
+gayguides1 <- gayguides %>%
+  filter(!is.na(lon) & !is.na(lat) & lon != "" & lat != "" & !is.na(city))
+ GG_map <- leaflet(data = gayguides) %>%
+  addTiles() %>%
+  addMarkers(
+    lng = ~lon,
+    lat = ~lat,
+    popup = ~city)
+```
+
 
 ```
 
 (@) Explain what choices you made in building this map? Why might you use leaflet over ggplot? When would ggplot be more desirable? 
 
->
+>ggplot is better for more precise mapping, leaflet is for quick, less accurate mapping.
 
 
 ### Exercises
-For the next portion of this worksheet I'd like you to look back at the email about the National Parks Data. Using this data (link below) you should use ggplot (charts, maps) and other mapping tools to come up with several ways to visualize it based on the points outlined in Dr. Barczewski's email. You should try to think about this from the perspective of her larger book project, how could you visualize this data to help her make a compelling argument? 
+For the next portion of this worksheet you will use some data about national parks that Dr. Barczewski created. Using this data (link below) you should use ggplot (charts, maps) and other mapping tools to come up with several ways to visualize it. You should try to think about this from the perspective of her larger book project, how could you visualize this data to help her make a compelling argument? See the email I send for more details about her project. Pick a dimension and make maps based on it.
 
 ```{r}
+
+```
+```{r}
+library(ggplot2)
+read.csv("https://raw.githubusercontent.com/regan008/DigitalMethodsData/main/raw/parks-geocoded.csv")
 parks <- read.csv("https://raw.githubusercontent.com/regan008/DigitalMethodsData/main/raw/parks-geocoded.csv")
+ggplot(parks, aes(x = year, fill = state_region_province)) +
+geom_histogram(position = "dodge", binwidth = 5) +
+theme_minimal() +
+labs(x = "Year Established", y = "Number of Parks",
+title = "Comparison of Park Establishment by Region")
+ggplot(parks, aes(x = state_region_province, y = total_sq_kilometers)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(x = "Parks in Regions", y = "Park Size (sq km)", title = "Comparison of Park Sizes by Region")
+ggplot(parks, aes(x = state_region_province, y = distance_from_closest_city)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(x = "State/Region/Province", y = "Distance to Nearest Urban Area (km)",
+       title = "Park Proximity to Urban Areas by Region")
+```
+```{r}
+```{r}
+```{r}
+```
+```{r}
 ```
 
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+```
+
+```
